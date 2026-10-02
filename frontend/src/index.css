@@ -1,0 +1,200 @@
+/* Design tokens ---------------------------------------------------- */
+:root {
+  --ink: #16233a;        /* primary text / headers */
+  --ink-soft: #4a5568;   /* secondary text */
+  --paper: #faf9f7;      /* page background */
+  --surface: #ffffff;    /* card/table background */
+  --line: #dfdad2;       /* hairline borders */
+  --amber: #d97b1f;      /* primary action */
+  --amber-deep: #b3630f; /* hover */
+  --slot-green: #2f6b4f; /* success / stock ok */
+  --slot-red: #a8341f;   /* error / stock low */
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--font-display); margin: 0; }
+
+a { color: inherit; }
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+/* Layout ------------------------------------------------------------ */
+.app-shell { min-height: 100vh; display: flex; flex-direction: column; }
+
+.topbar {
+  background: var(--ink);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.75rem;
+  border-bottom: 3px solid var(--amber);
+}
+
+.topbar .brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+.topbar .brand span { color: var(--amber); }
+
+.topbar nav { display: flex; gap: 1.4rem; align-items: center; }
+.topbar nav a, .topbar nav button {
+  color: #e6e2da;
+  text-decoration: none;
+  background: none;
+  border: none;
+  font-size: 0.92rem;
+  padding: 0.3rem 0;
+  border-bottom: 2px solid transparent;
+}
+.topbar nav a.active, .topbar nav a:hover, .topbar nav button:hover {
+  color: #fff;
+  border-bottom-color: var(--amber);
+}
+
+.topbar .who {
+  font-size: 0.8rem;
+  color: #b9b2a5;
+  font-family: var(--font-mono);
+}
+
+main.container {
+  flex: 1;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2.25rem 1.75rem 4rem;
+}
+
+.page-head { margin-bottom: 1.75rem; border-bottom: 1px solid var(--line); padding-bottom: 1rem; }
+.page-head h1 { font-size: 1.6rem; }
+.page-head p { color: var(--ink-soft); margin: 0.3rem 0 0; max-width: 60ch; }
+
+/* Cards / surfaces --------------------------------------------------- */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 1.5rem;
+}
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+@media (max-width: 760px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* Forms --------------------------------------------------------------- */
+.field { margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.field label { font-size: 0.82rem; color: var(--ink-soft); }
+.field input, .field textarea, .field select {
+  border: 1px solid var(--line);
+  padding: 0.6rem 0.7rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background: #fff;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+  outline: 2px solid var(--amber);
+  outline-offset: 1px;
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+.btn:hover { background: #0e1829; }
+.btn.primary { background: var(--amber); border-color: var(--amber); }
+.btn.primary:hover { background: var(--amber-deep); border-color: var(--amber-deep); }
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn.ghost:hover { background: #f1ede6; }
+.btn.small { padding: 0.35rem 0.75rem; font-size: 0.82rem; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.error-banner {
+  background: #fbe9e5;
+  border: 1px solid var(--slot-red);
+  color: var(--slot-red);
+  padding: 0.7rem 1rem;
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
+}
+.success-banner {
+  background: #e9f3ee;
+  border: 1px solid var(--slot-green);
+  color: var(--slot-green);
+  padding: 0.7rem 1rem;
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
+}
+
+/* Tables ---------------------------------------------------------------- */
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+th, td { text-align: left; padding: 0.65rem 0.7rem; border-bottom: 1px solid var(--line); }
+th { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); }
+tr:hover td { background: #fbf9f6; }
+
+.tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--line);
+}
+.tag.pending { color: #92650f; border-color: #92650f; }
+.tag.processing { color: #1f5c92; border-color: #1f5c92; }
+.tag.shipped { color: #6b3f9e; border-color: #6b3f9e; }
+.tag.completed { color: var(--slot-green); border-color: var(--slot-green); }
+.tag.cancelled { color: var(--slot-red); border-color: var(--slot-red); }
+
+.stock-low { color: var(--slot-red); font-weight: 600; }
+.stock-ok { color: var(--slot-green); }
+
+.tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem; }
+.tabs button {
+  background: none; border: none; padding: 0.7rem 1.1rem;
+  font-size: 0.9rem; color: var(--ink-soft); border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.tabs button.active { color: var(--ink); border-bottom-color: var(--amber); font-weight: 600; }
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--ink-soft);
+  border: 1px dashed var(--line);
+}
+
+.auth-wrap {
+  max-width: 400px;
+  margin: 3.5rem auto;
+  padding: 0 1.5rem;
+}
+.auth-wrap .panel { padding: 2rem; }
+.auth-wrap h1 { font-size: 1.4rem; margin-bottom: 0.3rem; }
+.auth-wrap .sub { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 1.5rem; }
+.auth-switch { margin-top: 1.2rem; font-size: 0.88rem; color: var(--ink-soft); }
+.auth-switch button { background: none; border: none; color: var(--amber-deep); text-decoration: underline; padding: 0; font-size: 0.88rem; }
+
+.qty-input { width: 64px; }
